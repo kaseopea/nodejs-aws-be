@@ -8,6 +8,7 @@ export const handler = async (event) => {
     } catch(err) {
         handleError(err);
     }
+
 }
 
 function handleError(err) {

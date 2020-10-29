@@ -4,24 +4,23 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     entry: slsw.lib.entries,
-    target: 'node',
     mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
     optimization: {
         minimize: false
     },
-    externals: [nodeExternals()],
+    target: 'node',
+    // externals: [nodeExternals({
+    //     modulesDir: path.resolve(__dirname, 'node_modules'),
+    //     allowlist: [
+    //         'source-map-support'
+    //     ]
+    // })],
     devtool: 'nosources-source-map',
-    output: {
-        libraryTarget: 'commonjs',
-        path: path.resolve(__dirname, '.webpack'),
-        filename: '[name].js',
-        sourceMapFilename: '[file].map'
-    },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules|bower_components.)/,
                 use: {
                     loader: 'babel-loader',
                     options: {

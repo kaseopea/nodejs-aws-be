@@ -5,12 +5,14 @@
       "@babel/preset-env",
       {
         "targets": {
-          "node": "12"
+          "node": "12",
+          "esmodules": true
         }
       }
     ]
   ],
   "plugins": [
-    "source-map-support"
+    "source-map-support",
+    "@babel/plugin-transform-runtime"
   ]
 }

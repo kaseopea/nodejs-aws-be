@@ -4,9 +4,10 @@
   "description": "Backend for NodeJS AWS Course",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:getProductsList": "serverless invoke local --function getProductsList",
-    "test:getProductById": "serverless invoke local --function getProductById --path=./mock/getProductById-event.json"
+    "deploy": "serverless deploy",
+    "deploy:verbose": "serverless deploy -v",
+    "invoke:getProductsList": "serverless invoke local --function getProductsList",
+    "invoke:getProductById": "serverless invoke local --function getProductById --path=./mock/getProductById-event.json"
   },
   "repository": {
     "type": "git",
