@@ -10,6 +10,8 @@ provider:
   stage: dev
   versionFunctions: false
   region: eu-west-1
+  httpApi:
+    cors: true
 
 custom:
   webpack:
@@ -25,11 +27,12 @@ plugins:
 functions:
   getProductsList:
     handler: handlers/getProductsList.handler
+    events:
+      - httpApi: 'GET /product/available'
   getProductById:
     handler: handlers/getProductById.handler
-#    events:
-#      - http:
-#          path: users/create
-#          method: get
-#      - websocket: $connect
-#      - cloudwatchLog: '/aws/lambda/hello'
+    events:
+      - httpApi:
+          method: GET
+          path: /product/{id}
+

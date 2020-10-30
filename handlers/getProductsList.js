@@ -1,9 +1,11 @@
-import { PRODUCTS_MOCK } from '../mock/products';
+import { productService } from './services/product.service';
 
 export const handler = async (event) => {
     console.log('Something Changed!!!');
     try {
-        return await Promise.resolve(PRODUCTS_MOCK);
+        const products = productService.getProducts();
+
+        return await Promise.resolve(products);
     } catch(err) {
         handleError(err);
     }
