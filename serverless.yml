@@ -10,8 +10,6 @@ provider:
   stage: dev
   versionFunctions: false
   region: eu-west-1
-  httpApi:
-    cors: true
 
 custom:
   webpack:

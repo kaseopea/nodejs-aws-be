@@ -3,20 +3,26 @@ class ResponseService {
 
     getResponsePlain(httpStatusCode, data) {
         return {
-            "statusCode": httpStatusCode,
-            "isBase64Encoded": false,
-            "body": data
+            'statusCode': httpStatusCode,
+            'headers': {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
+            'isBase64Encoded': false,
+            'body': data
         }
     }
 
     getResponse(httpStatusCode, data) {
         return {
-            "statusCode": httpStatusCode,
-            "headers": {
-                "Content-Type": 'application/json'
+            'statusCode': httpStatusCode,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
             },
-            "isBase64Encoded": false,
-            "body": JSON.stringify(data)
+            'isBase64Encoded': false,
+            'body': JSON.stringify(data)
         }
     }
 }
