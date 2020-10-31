@@ -4,8 +4,9 @@
   "description": "Backend for NodeJS AWS Course",
   "main": "handler.js",
   "scripts": {
+    "package": "serverless package",
     "deploy": "serverless deploy",
-    "deploy:verbose": "serverless deploy -v",
+    "deploy:verbose": "serverless deploy --verbose",
     "invoke:getProductsList": "serverless invoke local --function getProductsList",
     "invoke:getProductById": "serverless invoke local --function getProductById --path=./mock/getProductById-event.json"
   },

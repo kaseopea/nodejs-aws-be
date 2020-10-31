@@ -25,14 +25,20 @@ plugins:
   - serverless-webpack
   
 functions:
+  welcome:
+    handler: handlers/welcome.handler
+    events:
+      - httpApi: 'GET /${self:provider.stage}'
   getProductsList:
     handler: handlers/getProductsList.handler
     events:
-      - httpApi: 'GET /product/available'
+      - httpApi:
+          method: GET
+          path: /${self:provider.stage}/product/available
   getProductById:
     handler: handlers/getProductById.handler
     events:
       - httpApi:
           method: GET
-          path: /product/{id}
+          path: /${self:provider.stage}/product/{id}
 

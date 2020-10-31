@@ -9,12 +9,6 @@ module.exports = {
         minimize: false
     },
     target: 'node',
-    // externals: [nodeExternals({
-    //     modulesDir: path.resolve(__dirname, 'node_modules'),
-    //     allowlist: [
-    //         'source-map-support'
-    //     ]
-    // })],
     devtool: 'nosources-source-map',
     module: {
         rules: [
