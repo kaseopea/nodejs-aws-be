@@ -71,4 +71,4 @@ export const PRODUCTS_MOCK = [
       "price": 1599,
       "title": "Sigma 105mm F1.4 DG HSM"
     }
-]; 
+];
