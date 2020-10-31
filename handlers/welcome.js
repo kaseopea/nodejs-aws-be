@@ -1,7 +1,8 @@
+import { responseService } from './services/response.service';
 
 export const handler = async (event) => {
-    return await Promise.resolve({
-        statusCode: 200,
-        message: 'Hello from products service',
-    });
+    const message = 'Mess with the Best, Die like the Rest';
+    const response = responseService.getResponsePlain(200, message);
+
+    return await Promise.resolve(response);
 }
