@@ -6,7 +6,7 @@ class ProductService {
     }
 
     getProducts() {
-        return this.products;
+        return this.products || [];
     }
 
     getProductById(productId) {

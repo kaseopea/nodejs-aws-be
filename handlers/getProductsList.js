@@ -8,10 +8,10 @@ export const handler = async () => {
         
         return await Promise.resolve(response);
     } catch(err) {
-        handleError(err);
+        return await Promise.resolve(responseService.getResponse(500, {
+            status: 500,
+            ...err
+        }));
     }
 }
 
-function handleError(err) {
-    console.log(err);
-}
