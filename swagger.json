@@ -1,0 +1,109 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample Product API for NodeJS AWS Course.",
+    "version": "1.0.0",
+    "title": "Photo Wish Shop Petstore",
+    "contact": {
+      "email": "vitali.rusau@epam.com"
+    }
+  },
+  "host": "dna4dmh8vb.execute-api.eu-west-1.amazonaws.com",
+  "basePath": "/dev/product",
+  "tags": [
+    {
+      "name": "products",
+      "description": "Everything related to Products"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/available": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "List of all Products",
+        "description": "Get list of all Products",
+        "operationId": "productsList",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        }
+      }
+    },
+    "/{productId}": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Find pet by ID",
+        "description": "Returns a single pet",
+        "operationId": "getPetById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "ID of product to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "404": {
+            "description": "Pet not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "xml": {
+        "name": "Order"
+      }
+    }
+  }
+}

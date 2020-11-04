@@ -1,0 +1,42 @@
+# Welcome to Serverless!
+# Happy Coding!
+
+service: products
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  versionFunctions: false
+  region: eu-west-1
+
+custom:
+  webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules: true
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  
+functions:
+  welcome:
+    handler: handlers/welcome.handler
+    events:
+      - httpApi: 'GET /${self:provider.stage}'
+  getProductsList:
+    handler: handlers/getProductsList.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /${self:provider.stage}/product/available
+  getProductById:
+    handler: handlers/getProductById.handler
+    events:
+      - httpApi:
+          method: GET
+          path: /${self:provider.stage}/product/{id}
+

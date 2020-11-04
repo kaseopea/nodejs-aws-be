@@ -1,0 +1,18 @@
+{
+  "comments": false,
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "12",
+          "esmodules": true
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "source-map-support",
+    "@babel/plugin-transform-runtime"
+  ]
+}
