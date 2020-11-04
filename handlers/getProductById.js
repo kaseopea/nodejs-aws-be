@@ -6,7 +6,7 @@ export const handler = async (event) => {
     let response;
     
     try {
-        const product = productService.getProductById(id);
+        const product = await productService.getProductById(id);
         if (product) {
             response = responseService.getResponse(200, product);
         } else {

@@ -10,6 +10,12 @@ provider:
   stage: dev
   versionFunctions: false
   region: eu-west-1
+  environment:
+    PG_HOST: 'photowish-products.cx9e2wg0ddmc.eu-west-1.rds.amazonaws.com'
+    PG_PORT: '5432'
+    PG_DATABASE: 'products'
+    PG_USER: 'postgres'
+    PG_PASSWORD : 'cRhRfHwUJ3k2b1ousdm4'
 
 custom:
   webpack:
