@@ -3,6 +3,7 @@
 ### SQL Queries
 
 Create `products` table
+    
     CREATE TABLE products (
         id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
         title TEXT NOT NULL,
@@ -12,6 +13,7 @@ Create `products` table
     );
 
 Create `stocks` table
+    
     CREATE TABLE stocks (
         id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
         product_id uuid,
@@ -20,9 +22,11 @@ Create `stocks` table
     );
 
 Plugin for using uuid
+    
     CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 Insert data into both tables
+    
     INSERT INTO public.products (title, description, photo, price) values
     ('Sigma 50mm F1.4 DG ART', 'Travel, Wedding & Events, Portrait, Family', 'sigma_50_1_4.jpg', 949),
     ('Sigma 35mm F1.4 DG', 'Travel, Wedding & Events, Portrait, Specialty', 'sigma_35_1_4.jpg', 799),
