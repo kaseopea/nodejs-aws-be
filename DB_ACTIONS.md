@@ -1,12 +1,3 @@
-{
-    "count": 2,
-    "description": "Creative, Wedding & Events, Portrait, Sports & Action, Specialty",
-    "id": "e1948835-42ba-4e74-a539-2bf57b5df56b",
-    "photo": "sigma_105_1_4.jpg",
-    "price": 1599,
-    "title": "Sigma 105mm F1.4 DG HSM"
-}
-
 CREATE TABLE products (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     title TEXT NOT NULL,
