@@ -10,7 +10,7 @@ export const handler = async () => {
     } catch(err) {
         return await Promise.resolve(responseService.getResponse(500, {
             status: 500,
-            ...err
+            message: err.message
         }));
     }
 }
