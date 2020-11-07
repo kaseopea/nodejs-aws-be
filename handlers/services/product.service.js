@@ -52,6 +52,37 @@ class ProductService {
             throw new Error(err.message);
         }
     }
+
+    async createProduct(payload) {
+        const values = [
+            payload.title,
+            payload.description,
+            payload.photo,
+            payload.price,
+            payload.count
+        ];
+        const query = `WITH insert_meta AS (
+            INSERT INTO products(title, description, photo, price) VALUES($1, $2, $3, $4)
+            RETURNING *
+        ),
+        insert_stocks AS (
+            INSERT INTO stocks(product_id, count)
+            SELECT id, $5 FROM insert_meta
+            RETURNING *
+        )
+        SELECT p1.id, p1.title, p1.description, p1.photo, p1.price, p2.count FROM insert_meta p1, insert_stocks p2`;
+
+        try {
+            const client = await this.client.connect();
+            const { rows: product } = await client.query(query, values);
+            client.release();
+            
+            return product; 
+        }
+        catch (err) {
+            throw new Error(err.message);
+        }
+    }
 }
 
 export const productService = new ProductService();

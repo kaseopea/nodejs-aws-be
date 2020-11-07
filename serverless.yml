@@ -45,4 +45,10 @@ functions:
       - httpApi:
           method: GET
           path: /${self:provider.stage}/product/{id}
+  createProduct:
+    handler: handlers/createProduct.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /${self:provider.stage}/products
 
