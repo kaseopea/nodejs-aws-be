@@ -1,4 +1,4 @@
-class LogggerService {
+class LoggerService {
     constructor() {}
 
     logRequest(event) {
@@ -16,4 +16,4 @@ class LogggerService {
     }
 }
 
-export const loggerService = new LogggerService();
+export const loggerService = new LoggerService();

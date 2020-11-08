@@ -29,7 +29,9 @@ class ProductService {
             return products; 
         }
         catch (err) {
-            throw new Error(err.message);
+            throw {
+                message: err.message
+            };
         }
     }
 
@@ -49,11 +51,19 @@ class ProductService {
             return product.rows[0]; 
         }
         catch (err) {
-            throw new Error(err.message);
+            throw {
+                message: err.message
+            };
         }
     }
 
     async createProduct(payload) {
+        if (!payload) {
+            throw {
+                status: 400,
+                message: 'No payload provided'
+            };
+        }
         const values = [
             payload.title,
             payload.description,
@@ -77,12 +87,12 @@ class ProductService {
             const { rows: product } = await client.query(query, values);
             client.release();
             
-            return product; 
+            return product[0]; 
         }
         catch (err) {
-            throw new Error({
+            throw {
                 message: err.message
-            });
+            };
         }
     }
 }
