@@ -1,8 +1,10 @@
 import { productService } from './services/product.service';
 import { responseService } from './services/response.service';
+import { loggerService } from './services/logger.service';
 
+export const handler = async (event) => {
+    loggerService.logRequest(event);
 
-export const handler = async () => {
     try {
         const products = await productService.getProducts();
         const response = responseService.getResponse(200, products);

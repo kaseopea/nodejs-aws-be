@@ -59,7 +59,7 @@ class ProductService {
             payload.description,
             payload.photo,
             payload.price,
-            payload.count
+            payload.count || 0
         ];
         const query = `WITH insert_meta AS (
             INSERT INTO products(title, description, photo, price) VALUES($1, $2, $3, $4)
@@ -80,7 +80,9 @@ class ProductService {
             return product; 
         }
         catch (err) {
-            throw new Error(err.message);
+            throw new Error({
+                message: err.message
+            });
         }
     }
 }
