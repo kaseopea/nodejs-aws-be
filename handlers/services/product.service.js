@@ -20,15 +20,19 @@ class ProductService {
         FROM products
         INNER JOIN stocks
         ON (products.id = stocks.product_id)`;
+        let client;
 
         try {
-            const client = await this.client.connect();
+            client = await this.client.connect();
             const { rows: products } = await client.query(query);
             client.release();
             
             return products; 
         }
         catch (err) {
+            if (client) {
+                client.release();
+            }
             throw {
                 message: err.message
             };
@@ -36,21 +40,28 @@ class ProductService {
     }
 
     async getProductById(productId) {
+        const values = [
+            productId,
+        ];
+        let client;
         const query = `SELECT p.id,p.title,p.description,p.photo,p.price,s.count
         FROM products p        
         INNER JOIN stocks s
         ON (p.id = s.product_id)
-        WHERE p.id='${productId}'`;
+        WHERE p.id=$1`;
 
         try {
-            const client = await this.client.connect();
-            const product = await client.query(query);
+            client = await this.client.connect();
+            const product = await client.query(query, values);
             client.release();
             console.log(product);
             
             return product.rows[0]; 
         }
         catch (err) {
+            if (client) {
+                client.release();
+            }
             throw {
                 message: err.message
             };
@@ -71,6 +82,7 @@ class ProductService {
             payload.price,
             payload.count || 0
         ];
+        let client;
         const query = `WITH insert_meta AS (
             INSERT INTO products(title, description, photo, price) VALUES($1, $2, $3, $4)
             RETURNING *
@@ -83,13 +95,16 @@ class ProductService {
         SELECT p1.id, p1.title, p1.description, p1.photo, p1.price, p2.count FROM insert_meta p1, insert_stocks p2`;
 
         try {
-            const client = await this.client.connect();
+            client = await this.client.connect();
             const { rows: product } = await client.query(query, values);
             client.release();
             
             return product[0]; 
         }
         catch (err) {
+            if (client) {
+                client.release();
+            }
             throw {
                 message: err.message
             };
