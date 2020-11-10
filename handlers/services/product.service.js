@@ -25,17 +25,17 @@ class ProductService {
         try {
             client = await this.client.connect();
             const { rows: products } = await client.query(query);
-            client.release();
             
             return products; 
         }
         catch (err) {
-            if (client) {
-                client.release();
-            }
             throw {
                 message: err.message
             };
+        } finally {
+            if (client) {
+                client.release();
+            }
         }
     }
 
@@ -53,18 +53,17 @@ class ProductService {
         try {
             client = await this.client.connect();
             const product = await client.query(query, values);
-            client.release();
-            console.log(product);
             
             return product.rows[0]; 
         }
         catch (err) {
-            if (client) {
-                client.release();
-            }
             throw {
                 message: err.message
             };
+        } finally {
+            if (client) {
+                client.release();
+            }
         }
     }
 
@@ -97,17 +96,17 @@ class ProductService {
         try {
             client = await this.client.connect();
             const { rows: product } = await client.query(query, values);
-            client.release();
             
             return product[0]; 
         }
         catch (err) {
-            if (client) {
-                client.release();
-            }
             throw {
                 message: err.message
             };
+        } finally {
+            if (client) {
+                client.release();
+            }
         }
     }
 }

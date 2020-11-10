@@ -7,10 +7,11 @@ export const handler = async (event) => {
     console.log(JSON.stringify(event));
     const body = event.body ? JSON.parse(event.body) : {};
     let response;
-    loggerService.logRequest(event);
+
+    console.log(JSON.stringify(body));
 
     try {
-        if (!body || !body.title || (body.title !== 'string')) {
+        if (!body.title || (typeof body.title !== 'string')) {
             throw {
                 status: 400,
                 message: '400 Invalid payload'
