@@ -1,6 +1,5 @@
 import { productService } from './services/product.service';
 import { responseService } from './services/response.service';
-import { loggerService } from './services/logger.service';
 import { errorService } from './services/error.service';
 
 export const handler = async (event) => {

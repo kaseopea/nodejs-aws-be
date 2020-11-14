@@ -30,23 +30,23 @@ plugins:
   
 functions:
   welcome:
-    handler: handlers/welcome.handler
+    handler: src/product-service/welcome.handler
     events:
       - httpApi: 'GET /${self:provider.stage}'
   getProductsList:
-    handler: handlers/getProductsList.handler
+    handler: src/product-service/getProductsList.handler
     events:
       - httpApi:
           method: GET
           path: /${self:provider.stage}/product/available
   getProductById:
-    handler: handlers/getProductById.handler
+    handler: src/product-service/getProductById.handler
     events:
       - httpApi:
           method: GET
           path: /${self:provider.stage}/product/{id}
   createProduct:
-    handler: handlers/createProduct.handler
+    handler: src/product-service/createProduct.handler
     events:
       - httpApi:
           method: POST
