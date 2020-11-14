@@ -1,7 +1,7 @@
 import { productService } from './services/product.service';
-import { responseService } from './services/response.service';
-import { loggerService } from './services/logger.service';
-import { errorService } from './services/error.service';
+import { responseService } from '../libs/services/response.service';
+import { loggerService } from '../libs/services/logger.service';
+import { errorService } from '../libs/serviceserror.service';
 
 export const handler = async (event) => {
     const { id } = event.pathParameters;

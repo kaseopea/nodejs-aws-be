@@ -1,4 +1,4 @@
-import { responseService } from './product-service/services/response.service';
+import { responseService } from '../libs/services/response.service';
 
 export const handler = async (event) => {
     const message = 'Mess with the Best, Die like the Rest';
