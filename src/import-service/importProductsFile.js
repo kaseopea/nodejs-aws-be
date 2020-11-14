@@ -1,6 +1,8 @@
 import AWS from 'aws-sdk';
+import { responseService } from '../libs/services/response.service';
+import { GENERAL_CONFIG } from '../config/genaral.config';
 
-const BUCKET = 'photo-wish-products-import';
+const BUCKET = GENERAL_CONFIG.productsImportBucket;
 
 export const handler = async (event) => {
     const importName = event.queryStringParameters.name || 'undefinedName.csv';
@@ -19,7 +21,10 @@ export const handler = async (event) => {
     return new Promise((resolve, reject) => {
         s3.getSignedUrl('putObject', params, (error, url) => {
             if (error) {
-                reject(error);
+                reject(responseService.getResponse(500, {
+                    status: 500,
+                    message: error.message
+                }));
             }
 
             resolve({
