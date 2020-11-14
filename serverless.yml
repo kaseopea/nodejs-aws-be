@@ -10,6 +10,12 @@ provider:
   stage: dev
   versionFunctions: false
   region: eu-west-1
+  environment:
+    PG_HOST: 'photowish-products.cx9e2wg0ddmc.eu-west-1.rds.amazonaws.com'
+    PG_PORT: '5432'
+    PG_DATABASE: 'products'
+    PG_USER: 'postgres'
+    PG_PASSWORD : 'cRhRfHwUJ3k2b1ousdm4'
 
 custom:
   webpack:
@@ -39,4 +45,10 @@ functions:
       - httpApi:
           method: GET
           path: /${self:provider.stage}/product/{id}
+  createProduct:
+    handler: handlers/createProduct.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /${self:provider.stage}/products
 
