@@ -28,6 +28,7 @@ const publishMessage = async (message) => {
 export const handler = async (event) => {
     // create product in DB
     for (const record of event.Records) {
+        let response;
         const item = JSON.parse(record.body);
         try {
             if (!item.title || (typeof item.title !== 'string')) {
