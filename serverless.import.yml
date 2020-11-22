@@ -1,0 +1,53 @@
+# Welcome to Serverless!
+# Happy Coding!
+
+service: import-service
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  versionFunctions: false
+  region: eu-west-1
+  httpApi:
+    cors: true
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action: "s3:ListBucket"
+      Resource: 
+        - "arn:aws:s3:::photo-wish-products-import"
+    - Effect: Allow
+      Action:
+        - "s3:*"
+      Resource: 
+        - "arn:aws:s3:::photo-wish-products-import/*"
+
+custom:
+  webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules: true
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  
+functions:
+  importProductsFile:
+    handler: src/import-service/importProductsFile.handler
+    events:
+    - httpApi:
+          method: GET
+          path: /${self:provider.stage}/import
+  importFileParser:
+    handler: src/import-service/importFileParser.handler
+    events:
+      - s3:
+          bucket: photo-wish-products-import
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaded/
+          existing: true

@@ -5,11 +5,12 @@
   "main": "handler.js",
   "scripts": {
     "test": "jest",
-    "package": "serverless package",
-    "deploy": "serverless deploy",
-    "deploy:verbose": "serverless deploy --verbose",
-    "invoke:getProductsList": "serverless invoke local --function getProductsList",
-    "invoke:getProductById": "serverless invoke local --function getProductById --path=./mock/getProductById-event.json"
+    "products:package": "serverless package --config \"serverless.products.yml\"",
+    "products:deploy": "serverless deploy --config \"serverless.products.yml\"",
+    "products:deploy:verbose": "serverless deploy --config \"serverless.products.yml\" --verbose",
+    "import:package": "serverless package --config \"serverless.import.yml\"",
+    "import:deploy": "serverless deploy --config \"serverless.import.yml\"",
+    "import:deploy:verbose": "serverless deploy --config \"serverless.import.yml\" --verbose"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,8 @@
     "webpack-node-externals": "2.5.2"
   },
   "dependencies": {
+    "aws-sdk": "2.792.0",
+    "csv-parser": "2.3.3",
     "pg": "8.4.2",
     "source-map-support": "0.5.19"
   }

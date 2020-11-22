@@ -1,7 +1,6 @@
 import { productService } from './services/product.service';
-import { responseService } from './services/response.service';
-import { loggerService } from './services/logger.service';
-import { errorService } from './services/error.service';
+import { responseService } from '../libs/services/response.service';
+import { errorService } from '../libs/services/error.service';
 
 export const handler = async (event) => {
     console.log(JSON.stringify(event));
