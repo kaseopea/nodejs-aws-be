@@ -10,7 +10,10 @@
     "products:deploy:verbose": "serverless deploy --config \"serverless.products.yml\" --verbose",
     "import:package": "serverless package --config \"serverless.import.yml\"",
     "import:deploy": "serverless deploy --config \"serverless.import.yml\"",
-    "import:deploy:verbose": "serverless deploy --config \"serverless.import.yml\" --verbose"
+    "import:deploy:verbose": "serverless deploy --config \"serverless.import.yml\" --verbose",
+    "authorizer:package": "serverless package --config \"serverless.authorizer.yml\"",
+    "authorizer:deploy": "serverless deploy --config \"serverless.authorizer.yml\"",
+    "authorizer:deploy:verbose": "serverless deploy --config \"serverless.authorizer.yml\" --verbose"
   },
   "repository": {
     "type": "git",

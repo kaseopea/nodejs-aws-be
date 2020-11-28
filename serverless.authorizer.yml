@@ -1,0 +1,30 @@
+# Welcome to Serverless!
+# Happy Coding!
+service: authorization-service
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  versionFunctions: false
+  region: eu-west-1
+  timeout: 20
+  httpApi:
+    cors: true
+  
+custom:
+  webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules: true
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  
+functions:
+  basicAuthorizer:
+    handler: src/authorization-service/basicAuthorizer.handler
+  
