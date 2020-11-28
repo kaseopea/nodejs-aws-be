@@ -10,8 +10,6 @@ provider:
   versionFunctions: false
   region: eu-west-1
   timeout: 20
-  httpApi:
-    cors: true
   
 custom:
   webpack:
@@ -23,6 +21,7 @@ package:
 
 plugins:
   - serverless-webpack
+  - serverless-dotenv-plugin
   
 functions:
   basicAuthorizer:
