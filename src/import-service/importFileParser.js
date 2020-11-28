@@ -4,10 +4,32 @@ import { responseService } from '../libs/services/response.service';
 import { GENERAL_CONFIG } from '../config/genaral.config';
 
 const BUCKET = GENERAL_CONFIG.productsImportBucket;
+AWS.config.update({region: 'eu-west-1'});
 const s3 = new AWS.S3({
     apiVersion: '2006-03-01',
-    region: 'eu-west-1'
+    region: GENERAL_CONFIG.region
 });
+const sqs = new AWS.SQS({
+    apiVersion: '2012-11-05',
+});
+
+
+const sendMessage = async (message) => {
+    return new Promise((resolve, reject) => {
+        const params = {
+            QueueUrl: process.env.SQS_URL,
+            MessageBody: JSON.stringify(message),
+        };
+        sqs.sendMessage(params, (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    });
+}
+
 export const handler = async (event) => {
     for (const record of event.Records) {
         let response;
@@ -27,9 +49,17 @@ export const handler = async (event) => {
             }).promise();
             
             console.log(JSON.stringify(data));
+            console.log(`sqsUrl:`, process.env.SQS_URL);
+            
+            // send data to SQS
+            for (const item of data) {
+                const send = await sendMessage(item);
+                console.log(send);
+            }
 
             response = responseService.getResponse(200, data);
         } catch (error) {
+            console.log(JSON.stringify(error));
             response = responseService.getResponse(500, {
                 status: 500,
                 message: error.message
@@ -40,7 +70,7 @@ export const handler = async (event) => {
     }
 }
 
-function readFile(key) {
+async function readFile(key) {
     return new Promise((resolve, reject) => {
         const results = [];
         const params = {

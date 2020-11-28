@@ -1,6 +1,5 @@
 # Welcome to Serverless!
 # Happy Coding!
-
 service: import-service
 frameworkVersion: '2'
 
@@ -10,8 +9,13 @@ provider:
   stage: dev
   versionFunctions: false
   region: eu-west-1
+  timeout: 20
   httpApi:
     cors: true
+  
+  environment:
+    SQS_URL:
+      Ref: SQSQueue
 
   iamRoleStatements:
     - Effect: Allow
@@ -23,6 +27,10 @@ provider:
         - "s3:*"
       Resource: 
         - "arn:aws:s3:::photo-wish-products-import/*"
+    - Effect: Allow
+      Action: "sqs:*"
+      Resource:
+        Fn::GetAtt: [ SQSQueue, Arn ]
 
 custom:
   webpack:
@@ -51,3 +59,21 @@ functions:
           rules:
             - prefix: uploaded/
           existing: true
+
+resources:
+  Resources:
+    SQSQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: import-service-queue
+  Outputs:
+    SQSQueueUrl:
+      Value:
+        Ref: SQSQueue
+      Export:
+          Name: import-service-dev-SQSQueueUrl
+    SQSQueueArn:
+      Value:
+        Fn::GetAtt: [ SQSQueue, Arn ]
+      Export:
+          Name: import-service-dev-SQSQueueArn
