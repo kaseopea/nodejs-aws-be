@@ -10,7 +10,7 @@ provider:
   versionFunctions: false
   region: eu-west-1
   timeout: 20
-  httpApi:
+  http:
     cors: true
   
   environment:
@@ -31,6 +31,10 @@ provider:
       Action: "sqs:*"
       Resource:
         Fn::GetAtt: [ SQSQueue, Arn ]
+    - Effect: Allow
+      Action: "execute-api:Invoke"
+      Resource: 
+        - "arn:aws:lambda:eu-west-1:959362373889:function:authorization-service-dev-basicAuthorizer"
 
 custom:
   webpack:
@@ -47,9 +51,15 @@ functions:
   importProductsFile:
     handler: src/import-service/importProductsFile.handler
     events:
-    - httpApi:
+    - http:
           method: GET
-          path: /${self:provider.stage}/import
+          path: import
+          cors: true
+          authorizer:
+            arn: arn:aws:lambda:eu-west-1:959362373889:function:authorization-service-dev-basicAuthorizer
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.Authorization
+            type: request
   importFileParser:
     handler: src/import-service/importFileParser.handler
     events:
