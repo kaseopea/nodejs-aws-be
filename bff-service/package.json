@@ -1,12 +1,12 @@
 {
   "name": "bff-service",
   "version": "1.0.0",
-  "description": "",
+  "description": "BFF service for AWS NodeJS Course",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
-  "author": "vitali rusau",
+  "author": "Vitali_Rusau@epam.com",
   "license": "ISC",
   "dependencies": {
     "axios": "0.21.0",
