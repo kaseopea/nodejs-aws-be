@@ -24,6 +24,8 @@ app.all('/*', (req, res) => {
         };
         console.log(axiosConfig);
 
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        
         axios(axiosConfig).then(response => {
             console.log('axios response', response);
             res.json(response.data);
