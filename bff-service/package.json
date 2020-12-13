@@ -1,0 +1,16 @@
+{
+  "name": "bff-service",
+  "version": "1.0.0",
+  "description": "BFF service for AWS NodeJS Course",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Vitali_Rusau@epam.com",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "0.21.0",
+    "dotenv": "8.2.0",
+    "express": "4.17.1"
+  }
+}
